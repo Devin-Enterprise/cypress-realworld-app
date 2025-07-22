@@ -1,4 +1,3 @@
-/* istanbul ignore next */
 import React, { useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import { useActor, useMachine } from "@xstate/react";
@@ -31,7 +30,6 @@ if (window.Cypress) {
   window.authService = authService;
 }
 
-/* istanbul ignore next */
 const AppAuth0: React.FC = () => {
   const { isAuthenticated, user, getAccessTokenSilently } = useAuth0();
 
@@ -55,7 +53,7 @@ const AppAuth0: React.FC = () => {
     authState.matches("updating");
 
   return (
-    <Root className={classes.root}>
+    <Root className={classes.root} data-test="app-auth0">
       <CssBaseline />
 
       {isLoggedIn && (
@@ -65,10 +63,11 @@ const AppAuth0: React.FC = () => {
           authService={authService}
           snackbarService={snackbarService}
           bankAccountsService={bankAccountsService}
+          data-test="private-routes-container"
         />
       )}
 
-      <AlertBar snackbarService={snackbarService} />
+      <AlertBar snackbarService={snackbarService} data-test="alert-bar" />
     </Root>
   );
 };
